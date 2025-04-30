@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:17.4
+    environment:
+      POSTGRES_DB: quarkus-sveltekit
+      POSTGRES_USER: quarkus-sveltekit
+      POSTGRES_PASSWORD: quarkus-sveltekit
+    ports:
+      - "5432:5432"
+  app:
+    depends_on:
+      - db
+    build:
+      dockerfile: ./src/main/docker/Dockerfile.native-micro
+    ports:
+      - "8080:8080"
